@@ -1,0 +1,127 @@
+/* styles.css */
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Navigation Bar styles */
+.navbar {
+    background-color: #007bff !important; /* Set your desired navbar background color */
+}
+
+.navbar-brand {
+    color: #fff;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+}
+
+/* Main Content styles */
+.container {
+    max-width: 800px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+/* Footer styles */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+}
+
+/* Style for the travel date input */
+#travel-date {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+/* Style for the placeholder text */
+#travel-date::placeholder {
+    color: #999;
+}
+
+/* Style for the hover and focus states */
+#travel-date:hover,
+#travel-date:focus {
+    border-color: #66afe9;
+    outline: none;
+}
+
+/* Style for the calendar icon (if applicable) */
+#travel-date-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Style for the seat location dropdown */
+#seat-location {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style for the dropdown arrow */
+#seat-location-arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+/* Style for the dropdown menu */
+.seat-dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    z-index: 1;
+    display: none;
+}
+
+/* Style for dropdown items */
+.seat-dropdown-menu-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Hover effect for dropdown items */
+.seat-dropdown-menu-item:hover {
+    background-color: #f4f4f4;
+}
+
+/* Show the dropdown menu on hover */
+#seat-location:hover .seat-dropdown-menu {
+    display: block;
+}
+

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapx Bus Booking</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Mapx Bus Booking</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Bookings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Routes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Availability</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-4">
+  <!-- Booking Form -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Book a Bus</h5>
+      <form id="bookingForm" onsubmit="return validateForm()">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" class="form-control" id="fullName" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" name="phone" class="form-control" id="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="bus">Select Bus</label>
+          <select class="form-control" id="bus-type" required>
+                <option value="standard">Standard</option>
+                <option value="luxury">Luxury</option>
+                <option value="express">Express</option>
+            <!-- Populate with bus options -->
+          </select>
+        </div>
+        <div class="form-group">
+            <!-- Add more form fields for seat selection, date, etc. -->
+            <label for="travel-date">Travel Date:</label>
+            <input type="date" id="travel-date" name="travel-date" required>
+        </div>
+        <div class="form-group">
+            <label for="seat-location">Seat Location:</label>
+            <select id="seat-location" name="seat-location" required>
+            <!-- JavaScript will populate options here based on bus type -->
+        </select>
+        </div>
+
+        <!-- Map Container -->
+        <div id="map" class="form-group"></div>
+
+        <button type="submit" value="Submit" class="btn btn-primary">Book Now</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-4 py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">© 2024 Mapx Bus Booking System</span>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+<!-- Bootstrap JS and Custom JS -->
+<script>
+    // Initialize the plugin
+    var input = document.querySelector("#phone");
+    var iti = window.intlTelInput(input, {
+      initialCountry: "auto",
+      geoIpLookup: function(callback) {
+        fetch("https://ipinfo.io/json?token=85c7c85f1f0f76")
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Failed to fetch country for IP address.");
+          })
+          .then(function(data) {
+            callback(data.country);
+          })
+          .catch(function(error) {
+            console.error(error);
+            callback("US"); // Default to US if IP lookup fails
+          });
+      },
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>  
+
+<!-- Include Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="scripts.js"></script>
+</body>
+</html>
+
